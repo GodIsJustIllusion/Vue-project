@@ -1,10 +1,16 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-<!--  <HelloWorld msg="Welcome to Your Vue.js App"/>-->
-<!--  <counter-block></counter-block>-->
-<!--  <form-hello></form-hello>-->
-<!--  <ModalWindow></ModalWindow>-->
-  <NodeList></NodeList>
+  <div id="app">
+    <!--  <img alt="Vue logo" src="./assets/logo.png">-->
+    <!--  <HelloWorld msg="Welcome to Your Vue.js App"/>-->
+    <!--  <counter-block></counter-block>-->
+    <!--  <form-hello></form-hello>-->
+    <!--  <ModalWindow></ModalWindow>-->
+    <!--  <NodeList></NodeList>-->
+    <router-link to="/">Список дел</router-link>
+    <router-link to="/counter">Счётчик</router-link>
+    <router-link to="./formHello">Форма приветствия</router-link>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
@@ -12,12 +18,12 @@
 // import CounterBlock from "@/components/Counter";
 // import FormHello from "@/components/FormHello";
 // import modalWindow from "@/components/ModalWindow";
+// import NodeList from "@/components/NodeList";
 
-import NodeList from "@/components/NodeList";
 export default {
   name: 'App',
   components: {
-    NodeList
+    // NodeList
     // FormHello,
     // CounterBlock,
     // modalWindow

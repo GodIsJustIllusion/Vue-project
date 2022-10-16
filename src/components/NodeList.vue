@@ -19,10 +19,6 @@
       <td><button @click.prevent="delNode" v-bind:value="node.id">X</button></td>
     </tr>
   </table>
-
-<!--  <ul class="node-list">-->
-<!--    <li v-for:="(node, index) in Nodes.nodes">{{ node }} <button @click.prevent="delNode">X</button></li>-->
-<!--  </ul>-->
 </template>
 
 <script>

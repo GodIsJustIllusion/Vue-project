@@ -1,42 +1,56 @@
 <template>
-  <div id="my_modal" class="modal">
+  <div id="my_modal" v-bind:class="{ 'modal-open': hidden }">
     <div class="modal_content">
-      <span class="close_modal_window" @click="modalClose">×</span>
+      <span class="close_modal_window" @click="hide">×</span>
       <p>{{ firstname }} + ' ' + {{ lastname }}, вас приветствует приложение Vue</p>
     </div>
   </div>
 </template>
 
 <script>
-import {ModalState} from "@/ModalState";
+import { ModalState } from "@/ModalState";
 
 export default {
   name: "ModalWindow",
   data() {
     return {
-      firstname: '',
-      lastname: ''
+      hidden: true
     }
   },
+  props: {
+    firstname: {
+      type: String,
+      require: false,
+      default: "Имя"
+    },
+    lastname: {
+      type: String,
+      require: false,
+      default: "Фамилия"
+    },
+  },
   methods: {
-    modalClose() {
-      let modal = document.getElementById("my_modal");
-      ModalState.ShowHideModal = false
-      modal.style.display = "none";
-
-      window.onclick = function (event) {
-        ModalState.ShowHideModal = false
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      }
+    show: function () {
+      ModalState.ShowHideModal= true;
+      this.hidden = true;
+    },
+    hide: function () {
+      ModalState.ShowHideModal = false;
+      this.hidden = false;
+    },
+    trigger: function () {
+      ModalState.ShowHideModal = !ModalState.ShowHideModal;
+      this.hidden = !this.hidden;
     }
   }
 }
 </script>
 
 <style scoped>
-  .modal {
+  .modal-open {
+    display: block;
+  }
+  #my_modal {
     display: none;
     position: fixed;
     left: 0;
@@ -47,7 +61,7 @@ export default {
     background-color: rgba(0,0,0,0.8);
     z-index: 5;
   }
-  .modal .modal_content {
+  #my_modal .modal_content {
     background-color: #fefefe;
     margin: 20vh auto;
     padding: 20px;
@@ -55,7 +69,7 @@ export default {
     width: 50vw;
     z-index: 10;
   }
-  .modal .modal_content .close_modal_window {
+  #my_modal .modal_content .close_modal_window {
     color: #aaa;
     float: right;
     font-size: 28px;
