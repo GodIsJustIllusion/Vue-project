@@ -1,32 +1,27 @@
 <template>
-  <div id="app">
-    <!--  <img alt="Vue logo" src="./assets/logo.png">-->
-    <!--  <HelloWorld msg="Welcome to Your Vue.js App"/>-->
-    <!--  <counter-block></counter-block>-->
-    <!--  <form-hello></form-hello>-->
-    <!--  <ModalWindow></ModalWindow>-->
-    <!--  <NodeList></NodeList>-->
-    <router-link to="/">Список дел</router-link>
-    <router-link to="/counter">Счётчик</router-link>
-    <router-link to="./formHello">Форма приветствия</router-link>
-    <router-view></router-view>
+  <div v-for="item in User.data" :key="item.id">
+    {{ item }}
   </div>
+  <post-user></post-user>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// import CounterBlock from "@/components/Counter";
-// import FormHello from "@/components/FormHello";
-// import modalWindow from "@/components/ModalWindow";
-// import NodeList from "@/components/NodeList";
+import { User } from '@/User';
+import PostUser from "@/components/PostUser";
 
 export default {
   name: 'App',
   components: {
-    // NodeList
-    // FormHello,
-    // CounterBlock,
-    // modalWindow
+    PostUser
+  },
+  data() {
+    return {
+      list: {},
+      User
+    }
+  },
+  created() {
+    User.getListUser()
   }
 }
 </script>

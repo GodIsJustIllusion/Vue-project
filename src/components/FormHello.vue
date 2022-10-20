@@ -3,13 +3,15 @@
     <h2>Форма приветствия</h2>
     <section>
       <label for="firstname">Введите Ваше имя</label>
-      <input type="text" name="" id="firstname" required v-model=firstname>
+      <input type="text" name="" id="firstname" required :value="firstname"
+             @input="event => this.firstname = event.target.value">
     </section>
     <section>
       <label for="lastname">Введите Вашу фамилию</label>
-      <input type="text" name="" id="lastname" required v-model=lastname>
+      <input type="text" name="" id="lastname" required :value="lastname"
+             @input="event => this.lastname = event.target.value">
     </section>
-    <button @click="show()">ПРИВЕТ</button>
+    <button @click="show()" type="button">ПРИВЕТ</button>
   </form>
   <modal-window></modal-window>
 </template>
@@ -31,12 +33,16 @@ export default {
       lastname: ''
     }
   },
-  // methods: {
-  //   show: function () {
-  //     ModalState.shadowBoxHidden = true;
-  //     this.hidden = true;
-  //   }
-  // }
+  methods: {
+    show: function () {
+      ModalState.lastname = this.lastname;
+      ModalState.firstname = this.firstname;
+
+      ModalState.ShowHideModal = true;
+
+      this.hidden = true;
+    }
+  }
 }
 </script>
 

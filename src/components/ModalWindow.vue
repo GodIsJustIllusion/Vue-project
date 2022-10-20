@@ -1,8 +1,8 @@
 <template>
-  <div id="my_modal" v-bind:class="{ 'modal-open': hidden }">
+  <div id="my_modal" v-bind:class="{ 'modal-open': ModalState.ShowHideModal }">
     <div class="modal_content">
-      <span class="close_modal_window" @click="hide">×</span>
-      <p>{{ firstname }} + ' ' + {{ lastname }}, вас приветствует приложение Vue</p>
+      <span class="close_modal_window" @click="hide()">×</span>
+      <p>{{ ModalState.firstname }} {{ ModalState.lastname }}, вас приветствует приложение Vue</p>
     </div>
   </div>
 </template>
@@ -14,7 +14,8 @@ export default {
   name: "ModalWindow",
   data() {
     return {
-      hidden: true
+      ModalState,
+      hidden: false
     }
   },
   props: {
@@ -30,26 +31,15 @@ export default {
     },
   },
   methods: {
-    show: function () {
-      ModalState.ShowHideModal= true;
-      this.hidden = true;
-    },
     hide: function () {
       ModalState.ShowHideModal = false;
       this.hidden = false;
-    },
-    trigger: function () {
-      ModalState.ShowHideModal = !ModalState.ShowHideModal;
-      this.hidden = !this.hidden;
     }
   }
 }
 </script>
 
 <style scoped>
-  .modal-open {
-    display: block;
-  }
   #my_modal {
     display: none;
     position: fixed;
@@ -61,6 +51,10 @@ export default {
     background-color: rgba(0,0,0,0.8);
     z-index: 5;
   }
+  #my_modal.modal-open {
+    display: block;
+  }
+
   #my_modal .modal_content {
     background-color: #fefefe;
     margin: 20vh auto;
